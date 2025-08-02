@@ -50,10 +50,10 @@ fi
 
 # Check if content script exists
 echo "✅ Checking content script..."
-if [ -f "armory/carleton-timetables.js" ]; then
-    echo "   ✓ carleton-timetables.js exists"
+if [ -f "src/timetable-extractor.js" ]; then
+    echo "   ✓ timetable-extractor.js exists"
 else
-    echo "   ❌ carleton-timetables.js not found"
+    echo "   ❌ timetable-extractor.js not found"
 fi
 
 # Check if icons exist

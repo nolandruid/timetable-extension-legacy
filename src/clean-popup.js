@@ -155,7 +155,7 @@ class ScheduleExporter {
     const combined = document.getElementById('combined-export').checked;
     
     chrome.storage.session.set({
-      'timetable-requested': [true, 'carleton', 'armory/carleton-timetables.js'],
+      'timetable-requested': [true, 'carleton', 'src/timetable-extractor.js'],
       'export-format': format,
       'export-combined': combined
     }, () => {

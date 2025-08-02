@@ -4,7 +4,7 @@
 <summary><strong>Phase 1: Project Cleanup & Analysis (4-6 hours)</strong></summary>
 
 ### Preserve and move core functionality (1-2 hours)
-- [ ] **Copy armory/carleton-timetables.js to src/timetable-extractor.js**
+- [*] **Copy armory/carleton-timetables.js to src/timetable-extractor.js**
   <details>
   <summary>Details</summary>
   > **What**: Move the main timetable extraction logic to the proper src/ directory
@@ -12,7 +12,7 @@
   > **How**: Copy the file, update any import/require statements in other files to point to the new location
   </details>
 
-- [ ] **Update all references to point to new location**
+- [*] **Update all references to point to new location**
   <details>
   <summary>Details</summary>
   > **What**: Find all files that import or reference the carleton-timetables.js file

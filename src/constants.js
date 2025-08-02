@@ -70,7 +70,7 @@ class Banners {
 }
 
 // class Registry{
-//   static carletonURLs = ['https://ssoman.carleton.ca/ssomanager/c/SSB?pkg=bwskfshd.P_CrseSchd', 'https://central.carleton.ca/prod/bwskfshd.P_CrseSchd', 'https://central.carleton.ca/prod/bwskfshd.P_CrseSchdDetl', 'armory/carleton-timetables.js']
+//   static carletonURLs = ['https://ssoman.carleton.ca/ssomanager/c/SSB?pkg=bwskfshd.P_CrseSchd', 'https://central.carleton.ca/prod/bwskfshd.P_CrseSchd', 'https://central.carleton.ca/prod/bwskfshd.P_CrseSchdDetl', 'src/timetable-extractor.js']
 // }
 
 export {

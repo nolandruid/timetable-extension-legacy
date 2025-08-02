@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Export button
   document.getElementById('export-btn').onclick = function() {
     chrome.storage.session.set({
-      'timetable-requested': [true, 'carleton', 'armory/carleton-timetables.js']
+      'timetable-requested': [true, 'carleton', 'src/timetable-extractor.js']
     });
     
     chrome.runtime.sendMessage({
