@@ -97,72 +97,81 @@
 </details>
 
 <details>
-<summary><strong>Phase 2: Simplify Architecture (6-8 hours)</strong></summary>
+<summary><strong>Phase 2: Implement Direct Page Injection (6-8 hours)</strong></summary>
 
-### Restructure file organization (2-3 hours)
-- [ ] **Move core extraction logic from armory/ to src/**
+### Remove popup-based architecture (2-3 hours)
+- [ ] **Remove popup files and dependencies**
   <details>
   <summary>Details</summary>
-  > **What**: Already done in Phase 1, but ensure it's properly integrated
-  > **Why**: Keep the main functionality in the standard src/ directory structure
-  > **How**: Verify the move was successful and all references are updated
+  > **What**: Delete popup.html, popup-minimal.html, popup-clean.html and their associated JS files
+  > **Why**: Switching to direct page injection eliminates the need for popup interfaces
+  > **How**: Remove popup files and update manifest.json to remove popup references
   </details>
 
-- [ ] **Consolidate multiple popup files into single popup.html**
+- [ ] **Update manifest.json for content script injection**
   <details>
   <summary>Details</summary>
-  > **What**: Merge popup.html, popup-minimal.html, and popup-clean.html into one file
-  > **Why**: Having multiple popup files is confusing and unnecessary
-  > **How**: Choose the best UI elements from each file and combine them into one clean interface
+  > **What**: Modify manifest.json to use content_scripts instead of action with popup
+  > **Why**: Content scripts can inject directly into Carleton pages, eliminating popup complexity
+  > **How**: Replace action/popup configuration with content_scripts that target Carleton domains
   </details>
 
-- [ ] **Merge CSS files into single stylesheet**
+- [ ] **Remove popup-related CSS files**
   <details>
   <summary>Details</summary>
-  > **What**: Combine style.css, clean-style.css, and any other CSS files into one
-  > **Why**: Reduce file count and make styling easier to manage
-  > **How**: Copy all styles into one file, remove duplicates, and update HTML references
+  > **What**: Delete style.css, clean-style.css and other popup-specific styling
+  > **Why**: No longer needed since we're not using popups
+  > **How**: Remove CSS files and update any remaining references
   </details>
 
-- [ ] **Create utils.js for shared functions**
+### Implement content script injection (3-4 hours)
+- [ ] **Create content script for Carleton pages**
   <details>
   <summary>Details</summary>
-  > **What**: Create a new file for common utility functions used across multiple files
-  > **Why**: Avoid code duplication and make functions reusable
-  > **How**: Move common functions (like date formatting, validation) into utils.js and import them where needed
+  > **What**: Create a new content script that injects an export button directly onto Carleton timetable pages
+  > **Why**: Users can see and click the export button right where they need it, without opening a popup
+  > **How**: Create content script that detects Carleton timetable pages and injects a styled export button
   </details>
 
-### Simplify background script (4-5 hours)
-- [ ] **Remove complex tab tracking system**
+- [ ] **Design inline export button UI**
   <details>
   <summary>Details</summary>
-  > **What**: Remove the session storage tracking of multiple tabs and complex tab management logic
-  > **Why**: The current system is overly complex and error-prone
-  > **How**: Remove the tab tracking code from background.js and replace with simpler approach
+  > **What**: Create a clean, contextual export button that appears on the Carleton timetable page
+  > **Why**: The button should look native to the page and be easily discoverable
+  > **How**: Design a button that matches Carleton's UI style and position it prominently on the page
   </details>
 
-- [ ] **Implement single-tab approach**
+- [ ] **Implement button click handling**
   <details>
   <summary>Details</summary>
-  > **What**: Use only one tab for the entire extraction process instead of multiple tabs
-  > **Why**: Simpler, more reliable, and easier to debug
-  > **How**: Modify the extraction flow to work within a single tab, using navigation instead of multiple tabs
+  > **What**: Handle the export button click to start the timetable extraction process
+  > **Why**: Users click the button to begin the export process
+  > **How**: Add click event listener to the injected button that triggers the extraction logic
   </details>
 
-- [ ] **Simplify message passing between components**
+- [ ] **Add loading states and feedback**
   <details>
   <summary>Details</summary>
-  > **What**: Reduce the number of messages sent between popup, background, and content scripts
-  > **Why**: Current message system is complex and hard to follow
-  > **How**: Consolidate messages into fewer, more meaningful ones with clear purposes
+  > **What**: Show loading indicators and progress feedback directly on the page
+  > **Why**: Users need to know the export is working and what step it's on
+  > **How**: Display progress messages and loading spinners near the export button
   </details>
 
-- [ ] **Clean up webNavigation listeners**
+### Simplify background script (1-2 hours)
+- [ ] **Remove complex tab management**
   <details>
   <summary>Details</summary>
-  > **What**: Simplify the navigation event listeners in background.js
-  > **Why**: Current listeners are complex and handle too many edge cases
-  > **How**: Keep only the essential navigation handling and remove unnecessary complexity
+  > **What**: Eliminate the complex tab tracking and management system from background.js
+  > **Why**: With direct page injection, we don't need to create/manage multiple tabs
+  > **How**: Remove tab creation, tracking, and cleanup code from background.js
+  </details>
+
+- [ ] **Simplify message passing**
+  <details>
+  <summary>Details</summary>
+  > **What**: Reduce message complexity between content script and background script
+  > **Why**: Direct page injection simplifies the communication flow
+  > **How**: Consolidate messages to just handle export requests and file downloads
   </details>
 
 </details>
@@ -241,24 +250,24 @@
 <details>
 <summary><strong>Phase 4: User Interface Overhaul (6-10 hours)</strong></summary>
 
-### Design minimal, functional UI (3-5 hours)
-- [ ] **Create single popup interface**
+### Design contextual page UI (3-5 hours)
+- [ ] **Create inline export button design**
   <details>
   <summary>Details</summary>
-  > **What**: Design a clean, simple popup that shows the main export button and status
-  > **Why**: Current UI is cluttered and confusing
-  > **How**: Create a simple design with one main button, status area, and settings if needed
+  > **What**: Design a clean, contextual export button that appears on Carleton timetable pages
+  > **Why**: The button should look native to the page and be easily discoverable
+  > **How**: Create a button that matches Carleton's UI style and position it prominently
   </details>
 
-- [ ] **Add clear progress indicators**
+- [ ] **Add clear progress indicators on page**
   <details>
   <summary>Details</summary>
   > **What**: Show users exactly what step the extension is on during extraction
   > **Why**: Users need feedback to know the extension is working
-  > **How**: Display step-by-step progress like "Step 1/4: Logging in..."
+  > **How**: Display step-by-step progress like "Step 1/4: Logging in..." directly on the page
   </details>
 
-- [ ] **Implement proper error messaging**
+- [ ] **Implement proper error messaging on page**
   <details>
   <summary>Details</summary>
   > **What**: Show user-friendly error messages when something goes wrong
@@ -266,20 +275,20 @@
   > **How**: Create simple, actionable error messages like "Please log in to Carleton first"
   </details>
 
-- [ ] **Add success confirmation**
+- [ ] **Add success confirmation on page**
   <details>
   <summary>Details</summary>
   > **What**: Show a clear success message when export completes
   > **Why**: Users need to know the export worked
-  > **How**: Display a success message with download link or confirmation
+  > **How**: Display a success message with download link or confirmation directly on the page
   </details>
 
-- [ ] **Make UI responsive**
+- [ ] **Make UI responsive and accessible**
   <details>
   <summary>Details</summary>
-  > **What**: Ensure the popup looks good on different screen sizes
-  > **Why**: Users have different monitor sizes and resolutions
-  > **How**: Use CSS flexbox/grid and test on different window sizes
+  > **What**: Ensure the injected UI looks good and is accessible on different screen sizes
+  > **Why**: Users have different monitor sizes and accessibility needs
+  > **How**: Use CSS flexbox/grid, add ARIA labels, and test on different window sizes
   </details>
 
 ### Improve user experience (3-5 hours)
@@ -597,7 +606,7 @@
   > **How**: Check each permission and remove any that aren't essential
   </details>
 
-- [ ] **Implement
+- [ ] **Implement Content Security Policy**
   <details>
   <summary>Details</summary>
   > **What**: Add CSP headers to prevent XSS attacks
@@ -619,7 +628,7 @@
   <summary>Details</summary>
   > **What**: Add accessibility labels to UI elements
   > **Why**: Makes the extension usable by people with disabilities
-  > **How**: Add aria-label attributes to buttons, inputs, and other
+  > **How**: Add aria-label attributes to buttons, inputs, and other interactive elements
   </details>
 
 - [ ] **Ensure keyboard navigation**
@@ -641,11 +650,12 @@
 </details>
 
 ## Success Criteria
-- [ ] Extension works with single click
+- [ ] Extension works with single click directly on Carleton pages
+- [ ] No popup interface needed
 - [ ] No complex tab management
 - [ ] Clean, maintainable codebase
 - [ ] Proper error handling
-- [ ] User-friendly interface
+- [ ] User-friendly interface that appears contextually
 - [ ] Reliable timetable extraction
 - [ ] Privacy-first approach maintained
 
